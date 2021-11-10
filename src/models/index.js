@@ -1,13 +1,14 @@
 import mongoose from 'mongoose';
 
-import User from './user';
-import Message from './message';
+import City from './city';
 
 const connectDb = () => {
-  return mongoose.connect(process.env.DATABASE_URL);
+  return mongoose.connect(
+    'mongodb://api:api@mongo:27017/cities?authSource=admin',
+  );
 };
 
-const models = { User, Message };
+const models = { City };
 
 export { connectDb };
 
