@@ -1,5 +1,8 @@
+import IncomingForm from 'formidable/src/Formidable';
+import formidable from 'formidable';
 import mongoose from 'mongoose';
 import models from '../models';
+import { uploadFile } from './awsService';
 
 export const addCity = async (req, res) => {
   try {
@@ -30,18 +33,36 @@ export const deleteCity = async (req, res) => {
 
 export const addCityDocument = async (req, res) => {
   try {
-    const city = await models.City.findByIdAndUpdate(req.params.id, {
-      $push: {
-        documents: new models.Document({
-          id: mongoose.Types.ObjectId(),
-          name: 'test',
-          url: 'https://',
-          createdAt: new Date(),
-        }),
-      },
-    }).exec();
+    const { document } = req.files;
+    const city = await models.City.findById(req.params.id);
 
-    res.send(city);
+    if (!city) {
+      throw Error();
+    }
+
+    const date = new Date();
+
+    const filename = `${
+      city._id
+    }/${date.getMonth()}_${date.getFullYear()}/${document.name}`;
+    const result = await uploadFile({
+      file: req.files.document.data,
+      name: filename,
+    });
+
+    // const city = await models.City.findByIdAndUpdate(req.params.id, {
+    //   $push: {
+    //     documents: new models.Document({
+    //       id: mongoose.Types.ObjectId(),
+    //       name: 'test',
+    //       url: 'https://',
+    //       createdAt: new Date(),
+    //     }),
+    //   },
+    // }).exec();
+
+    // res.send(city);
+    res.send(result);
   } catch (error) {
     res.send(error.message);
   }

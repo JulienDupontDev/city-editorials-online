@@ -4,10 +4,15 @@ import express from 'express';
 
 import models, { connectDb } from './models';
 import routes from './routes';
-
+import fileUpload from 'express-fileupload';
 const app = express();
 
-// * Application-Level Middleware * //
+// enable files upload
+app.use(
+  fileUpload({
+    createParentPath: true,
+  }),
+);
 
 // Third-Party Middleware
 
@@ -17,15 +22,6 @@ app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Custom Middleware
-
-app.use(async (req, res, next) => {
-  req.context = {
-    models,
-  };
-  next();
-});
 
 // * Routes * //
 
@@ -62,5 +58,3 @@ const createUsersWithMessages = async () => {
 
   await cityOne.save();
 };
-
-/* Initializing S3 */
