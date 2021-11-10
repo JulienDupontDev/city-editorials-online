@@ -37,11 +37,11 @@ const eraseDatabaseOnSync = true;
 
 connectDb()
   .then(async () => {
-    if (eraseDatabaseOnSync) {
-      await Promise.all([models.City.deleteMany({})]);
+    // if (eraseDatabaseOnSync) {
+    //   await Promise.all([models.City.deleteMany({})]);
 
-      createUsersWithMessages();
-    }
+    //   createUsersWithMessages();
+    // }
 
     app.listen(process.env.PORT, () =>
       console.log(
@@ -62,3 +62,5 @@ const createUsersWithMessages = async () => {
 
   await cityOne.save();
 };
+
+/* Initializing S3 */

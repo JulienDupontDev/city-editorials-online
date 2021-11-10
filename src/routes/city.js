@@ -1,10 +1,20 @@
 import { Router } from 'express';
+import {
+  addCity,
+  addCityDocument,
+  deleteCity,
+  getCities,
+} from '../services/cityService';
 
 const router = Router();
 
-router.get('/', async (req, res) => {
-  const cities = await req.context.models.City.find();
-  return res.send(cities);
-});
+// @route   GET api/city
+router.get('/', getCities);
+
+router.post('/', addCity);
+
+router.post('/:id/documents', addCityDocument);
+
+router.delete('/:id', deleteCity);
 
 export default router;

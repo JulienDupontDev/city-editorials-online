@@ -13,6 +13,17 @@ const citySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  admins: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+  documents: [
+    {
+      type: Array,
+    },
+  ],
 });
 
 const City = mongoose.model('City', citySchema);
