@@ -3,4 +3,4 @@ logfile
 node_modules/
 mongo
 
-.env.local
+.env*
