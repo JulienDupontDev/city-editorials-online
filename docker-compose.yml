@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:5.0.3
+    restart: always
+    volumes:
+      - './mongo/data:/data/db'
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_DATABASE: editorials_database
+      MONGO_INITDB_ROOT_USERNAME: api
+      MONGO_INITDB_ROOT_PASSWORD: api
+  node:
+    image: node:14
+    volumes:
+      - './:/var/www'
+    ports:
+      - '8081:3000'
+      - '9229:9229'
+    links:
+      - mongo
+    environment:
+      - URL_MONGO=mongodb://api:docker1234@mongo
+    command: bash -c 'cd /var/www && ./node_modules/.bin/nodemon --inspect=0.0.0.0:9229 --experimental-specifier-resolution=node src/index.js'
+  mongo-express:
+    image: mongo-express
+    ports:
+      - '8888:8081'
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=api
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=api
+      - ME_CONFIG_BASICAUTH_USERNAME=api
+      - ME_CONFIG_BASICAUTH_PASSWORD=api
+    depends_on:
+      - mongo
