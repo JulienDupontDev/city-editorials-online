@@ -1,6 +1,5 @@
 name: Deploy preprod
-on:
-  pull_request:
+on: pull_request
 
 jobs:
   build:
