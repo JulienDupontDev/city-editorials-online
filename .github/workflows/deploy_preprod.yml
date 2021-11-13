@@ -1,8 +1,6 @@
 name: Deploy preprod
 on:
   pull_request:
-    branches:
-      - develop
 
 jobs:
   build:
