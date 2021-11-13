@@ -23,5 +23,5 @@ jobs:
           environment_name: Cityeditorialspreprod-env
           region: eu-west-3
           deployment_package: deploy.zip
-          version_label: '${{ steps.timestamp.outputs.date }}'
+          version_label: test
           use_existing_version_if_available: true
