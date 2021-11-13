@@ -29,6 +29,10 @@ app.use('/cities', routes.city);
 
 app.use('/users', routes.user);
 
+app.use('/', (req, res) => {
+  res.send('hello');
+});
+
 // * Start * //
 
 const eraseDatabaseOnSync = true;
