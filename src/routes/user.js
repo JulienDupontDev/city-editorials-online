@@ -1,16 +1,20 @@
 import { Router } from 'express';
+import models from '../models';
+import { login } from '../services/userService';
 
 const router = Router();
+
+router.post('/login', login);
 
 router.get('/', async (req, res) => {
   const users = await req.context.models.User.find();
   return res.send(users);
 });
 
+router.post('/');
+
 router.get('/:userId', async (req, res) => {
-  const user = await req.context.models.User.findById(
-    req.params.userId,
-  );
+  const user = await models.User.findById(req.params.userId);
   return res.send(user);
 });
 
