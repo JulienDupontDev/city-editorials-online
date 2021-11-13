@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node --exec babel-node src/index.js --experimental-specifier-resolution=node",
     "dev": "nodemon --exec babel-node src/index.js --experimental-specifier-resolution=node",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test\" && exit 0"
   },
   "engines": {
     "node": "14.18.1"
