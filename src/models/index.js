@@ -5,10 +5,9 @@ import Document from './document';
 import User from './user';
 
 const connectDb = () => {
-  return mongoose.connect(
-    'mongodb://api:api@mongo:27017/cities?authSource=admin',
-    { useFindAndModify: false },
-  );
+  return mongoose.connect(process.env.DATABASE_URL, {
+    useFindAndModify: false,
+  });
 };
 
 const models = { City, Document, User };
