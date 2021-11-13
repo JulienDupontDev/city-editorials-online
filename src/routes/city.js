@@ -7,6 +7,7 @@ import {
   getCities,
   getCity,
 } from '../services/cityService';
+import authenticated from '../ middlewares/auth.middleware';
 
 const router = Router();
 
@@ -19,10 +20,10 @@ router.get('/:id', getCity);
 
 router.post('/', addCity);
 
-router.post('/:id/documents', addCityDocument);
+router.post('/:id/documents', authenticated, addCityDocument);
 
-router.delete('/:id', deleteCity);
+router.delete('/:id', authenticated, deleteCity);
 
-router.delete('/', deleteCities);
+router.delete('/', authenticated, deleteCities);
 
 export default router;

@@ -27,6 +27,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/cities', routes.city);
 
+app.use('/users', routes.user);
+
 // * Start * //
 
 const eraseDatabaseOnSync = true;
