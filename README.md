@@ -1,54 +1,9 @@
-# Simple Node with Express + MongoDB Server
+# City editorials online API
 
-[![Build Status](https://travis-ci.org/rwieruch/node-express-mongodb-server.svg?branch=master)](https://travis-ci.org/rwieruch/node-express-mongodb-server) [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/) [![Greenkeeper badge](https://badges.greenkeeper.io/rwieruch/node-express-mongodb-server.svg)](https://greenkeeper.io/)
-
-An easy way to get started with a Express server with MongoDB with Node.js. [Read more about it.](https://www.robinwieruch.de/mongodb-express-setup-tutorial/)
-
-## Features
+Api permettant de stocker des villes, des utilisateurs reliés à ces villes (admins) et d'envoyer les documents liés aux villes sur S3.
 
 - Express
-- REST API
 - MongoDB
+- Jest
 
-## Requirements
-
-- [node & npm](https://nodejs.org/en/)
-- [git](https://www.robinwieruch.de/git-essential-commands/)
-
-## Installation
-
-- `git clone git@github.com:rwieruch/node-express-mongodb-server.git`
-- `cd node-express-mongodb-server`
-- `npm install`
-- [start MongoDB](https://www.robinwieruch.de/mongodb-express-setup-tutorial/)
-- `npm start`
-- optional: include _.env_ in your _.gitignore_
-
-### GET Routes
-
-- visit http://localhost:3000
-  - /messages
-  - /messages/1
-  - /users
-  - /users/1
-
-### Beyond GET Routes
-
-#### CURL
-
-- Create a message with:
-  - `curl -X POST -H "Content-Type:application/json" http://localhost:3000/messages -d '{"text":"Hi again, World"}'`
-- Delete a message with:
-  - `curl -X DELETE -H "Content-Type:application/json" http://localhost:3000/messages/1`
-
-#### Postman
-
-- Install [Postman](https://www.getpostman.com/apps) to interact with REST API
-- Create a message with:
-  - URL: http://localhost:3000/messages
-  - Method: POST
-  - Body: raw + JSON (application/json)
-  - Body Content: `{ "text": "Hi again, World" }`
-- Delete a message with:
-  - URL: http://localhost:3000/messages/1
-  - Method: DELETE
+Pour les tests, il y a un fichier CI pour les branches develop et main. Par contre je n'ai pas réussi à faire marcher entièrement avec mongodb et jest qui me mets toujours une erreur qui est liée à une promise non résolue, par manque de temps ce n'est pas géré.

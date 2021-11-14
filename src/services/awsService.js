@@ -9,7 +9,7 @@ const s3 = new S3({
 
 export const uploadFile = ({ file, name }) => {
   const params = {
-    Bucket: process.env.AWS_BUCKET,
+    Bucket: process.env[`AWS_BUCKET_${process.env.ENV}`],
     Key: name,
     Body: file,
   };

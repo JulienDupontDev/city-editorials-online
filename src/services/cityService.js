@@ -1,8 +1,6 @@
-import IncomingForm from 'formidable/src/Formidable';
-import formidable from 'formidable';
 import mongoose from 'mongoose';
-import models from '../models';
-import { uploadFile } from './awsService';
+import models from '../models/index.js';
+import { uploadFile } from './awsService.js';
 import UserService from './userService.js';
 
 const hasAccessToRessource = (city, user) => {
@@ -39,9 +37,9 @@ export const addCity = async (req, res) => {
             }
             res.send(city);
           })
-          .catch((err) => res.status(500).send(err));
+          .catch((err) => res.status(400).send(err));
       })
-      .catch((err) => res.send(err));
+      .catch((err) => res.status(500).send(err));
   } catch (error) {
     res.status(400).send(error.message);
   }

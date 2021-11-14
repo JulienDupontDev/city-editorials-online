@@ -6,8 +6,8 @@ import {
   deleteCity,
   getCities,
   getCity,
-} from '../services/cityService';
-import authenticated from '../ middlewares/auth.middleware';
+} from '../services/cityService.js';
+import authenticated from '../ middlewares/auth.middleware.js';
 
 const router = Router();
 
