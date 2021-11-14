@@ -5,8 +5,9 @@ import express from 'express';
 import models, { connectDb } from './models/index.js';
 import routes from './routes/index.js';
 import fileUpload from 'express-fileupload';
+import mongoose from 'mongoose';
 const app = express();
-
+let mongoDB;
 // enable files upload
 app.use(
   fileUpload({
@@ -32,35 +33,21 @@ app.use('/users', routes.user);
 app.use('/', (req, res) => {
   res.send('hello');
 });
-
-// * Start * //
-
-const eraseDatabaseOnSync = true;
-
+7;
 connectDb()
   .then(async () => {
-    // if (eraseDatabaseOnSync) {
-    //   await Promise.all([models.City.deleteMany({})]);
+    mongoDB = mongoose;
+    if (process.env.ENV === 'PREPROD') {
+      await Promise.all([
+        models.City.deleteMany({}),
+        models.User.deleteMany({}),
+      ]);
+    }
 
-    //   createUsersWithMessages();
-    // }
-
-    app.listen(process.env.PORT, () =>
-      console.log(
-        `Example app listening on port ${process.env.PORT}!`,
-      ),
-    );
+    app.listen(process.env.PORT, () => {});
   })
   .catch((err) => console.log(err, 'putain derreur'));
 
-// * Database Seeding * //
+export const getMongoDBInstance = () => mongoDB;
 
-const createUsersWithMessages = async () => {
-  const cityOne = new models.City({
-    name: 'test',
-    zipcode: 91800,
-    country: 'France',
-  });
-
-  await cityOne.save();
-};
+export default app;
