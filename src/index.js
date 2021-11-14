@@ -64,3 +64,5 @@ const createUsersWithMessages = async () => {
 
   await cityOne.save();
 };
+
+export default app;
