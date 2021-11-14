@@ -1,5 +1,7 @@
+import mongoose from 'mongoose';
 import request from 'supertest';
-import app from '../index.js';
+import app, { getMongoDBInstance } from '../index.js';
+import { connectDb } from '../models/index.js';
 
 //change email everytime
 describe('Post endpoints', () => {
@@ -19,7 +21,6 @@ describe('Post endpoints', () => {
         },
       })
       .then((res) => {
-        console.log(res.body);
         expect(res.statusCode).toBe(200 || 201);
         expect(res.body).toHaveProperty('_id');
         expect(res.body).toHaveProperty('name');
