@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-import City from './city';
-import Document from './document';
-import User from './user';
+import City from './city.js';
+import Document from './document.js';
+import User from './user.js';
 
 const connectDb = () => {
   return mongoose.connect(process.env.DATABASE_URL, {

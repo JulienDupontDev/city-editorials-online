@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node node_modules/.bin/babel-node src/index.js --experimental-specifier-resolution=node",
+    "start": "node src/index.js --experimental-specifier-resolution=node",
     "dev": "nodemon --exec babel-node src/index.js --experimental-specifier-resolution=node",
     "test": "echo \"No test\" && exit 0"
   },
