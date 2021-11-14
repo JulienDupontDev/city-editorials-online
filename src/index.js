@@ -1,9 +1,9 @@
-import 'dotenv/config';
+import 'dotenv/config.js';
 import cors from 'cors';
 import express from 'express';
 
-import models, { connectDb } from './models';
-import routes from './routes';
+import models, { connectDb } from './models/index.js';
+import routes from './routes/index.js';
 import fileUpload from 'express-fileupload';
 const app = express();
 

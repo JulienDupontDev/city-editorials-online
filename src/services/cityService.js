@@ -1,8 +1,6 @@
-import IncomingForm from 'formidable/src/Formidable';
-import formidable from 'formidable';
 import mongoose from 'mongoose';
-import models from '../models';
-import { uploadFile } from './awsService';
+import models from '../models/index.js';
+import { uploadFile } from './awsService.js';
 import UserService from './userService.js';
 
 const hasAccessToRessource = (city, user) => {

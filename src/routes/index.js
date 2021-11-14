@@ -1,5 +1,5 @@
-import city from './city';
-import user from './user';
+import city from './city.js';
+import user from './user.js';
 
 export default {
   city,
