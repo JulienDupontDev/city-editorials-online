@@ -3,6 +3,7 @@ on:
   pull_request:
   branches:
     - develop
+    - main
 
 jobs:
   build:
@@ -14,6 +15,8 @@ jobs:
       - name: Install dependencies
         run: npm install
   tests:
+    env:
+      ENV: ${{ GITHUB_REF_NAME == develop && PREPROD || PROD}}
     runs-on: ubuntu-latest
     steps:
       - name: Run tests
