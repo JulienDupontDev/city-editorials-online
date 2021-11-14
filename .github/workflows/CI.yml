@@ -2,8 +2,8 @@ name: CI preprod
 on:
   pull_request:
     branches:
-    - develop
-    - main
+      - develop
+      - main
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
         run: npm install
   tests:
     env:
-      ENV: ${{ GITHUB_REF_NAME == develop && PREPROD || PROD}}
+      ENV: ${{ GITHUB_REF##*/ == develop && PREPROD || PROD}}
       DATABASE_URL_PREPROD: ${{secrets.DATABASE_URL_PREPROD}}
       AWS_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY}}
       AWS_KEY_ID: ${{secrets.AWS_KEY_ID}}
