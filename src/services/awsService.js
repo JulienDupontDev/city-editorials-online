@@ -4,7 +4,7 @@ const s3 = new S3({
   apiVersion: '2006-03-01',
   accessKeyId: process.env.AWS_KEY_ID,
   secretAccessKey: process.env.AWS_ACCESS_KEY,
-  region: 'us-east-1',
+  region: 'eu-west-3',
 });
 
 export const uploadFile = ({ file, name }) => {
