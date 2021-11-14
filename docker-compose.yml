@@ -13,7 +13,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: api
       MONGO_INITDB_ROOT_PASSWORD: api
   node:
-    image: node:12
+    image: node:14
     volumes:
       - './:/var/www'
     ports:
@@ -23,7 +23,7 @@ services:
       - mongo
     environment:
       - URL_MONGO=mongodb://api:docker1234@mongo
-    command: bash -c 'cd /var/www && ./node_modules/.bin/nodemon --inspect --experimental-specifier-resolution=node src/index.js'
+    command: bash -c 'cd /var/www && ./node_modules/.bin/nodemon --inspect=0.0.0.0:9229 --experimental-specifier-resolution=node src/index.js'
   mongo-express:
     image: mongo-express
     ports:

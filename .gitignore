@@ -2,3 +2,6 @@ logfile
 
 node_modules/
 mongo
+
+.env*
+.env

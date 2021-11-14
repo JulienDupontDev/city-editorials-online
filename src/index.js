@@ -4,10 +4,15 @@ import express from 'express';
 
 import models, { connectDb } from './models';
 import routes from './routes';
-
+import fileUpload from 'express-fileupload';
 const app = express();
 
-// * Application-Level Middleware * //
+// enable files upload
+app.use(
+  fileUpload({
+    createParentPath: true,
+  }),
+);
 
 // Third-Party Middleware
 
@@ -18,18 +23,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Custom Middleware
-
-app.use(async (req, res, next) => {
-  req.context = {
-    models,
-  };
-  next();
-});
-
 // * Routes * //
 
 app.use('/cities', routes.city);
+
+app.use('/users', routes.user);
+
+app.use('/', (req, res) => {
+  res.send('hello');
+});
 
 // * Start * //
 
@@ -37,11 +39,11 @@ const eraseDatabaseOnSync = true;
 
 connectDb()
   .then(async () => {
-    if (eraseDatabaseOnSync) {
-      await Promise.all([models.City.deleteMany({})]);
+    // if (eraseDatabaseOnSync) {
+    //   await Promise.all([models.City.deleteMany({})]);
 
-      createUsersWithMessages();
-    }
+    //   createUsersWithMessages();
+    // }
 
     app.listen(process.env.PORT, () =>
       console.log(

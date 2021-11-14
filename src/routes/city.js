@@ -1,10 +1,29 @@
 import { Router } from 'express';
+import {
+  addCity,
+  addCityDocument,
+  deleteCities,
+  deleteCity,
+  getCities,
+  getCity,
+} from '../services/cityService';
+import authenticated from '../ middlewares/auth.middleware';
 
 const router = Router();
 
-router.get('/', async (req, res) => {
-  const cities = await req.context.models.City.find();
-  return res.send(cities);
-});
+// get all cities
+router.get('/', getCities);
+
+// get city by ID
+
+router.get('/:id', getCity);
+
+router.post('/', addCity);
+
+router.post('/:id/documents', authenticated, addCityDocument);
+
+router.delete('/:id', authenticated, deleteCity);
+
+router.delete('/', authenticated, deleteCities);
 
 export default router;
